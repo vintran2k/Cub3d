@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 16:19:40 by vintran           #+#    #+#             */
-/*   Updated: 2021/02/25 16:21:55 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/08 16:28:21 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strndup(const char *s, size_t n)
 {
 	char	*dst;
 	size_t	slen;
-	size_t i;
+	size_t	i;
 
 	slen = ft_strlen(s);
 	if (n > slen)

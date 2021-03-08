@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 17:03:32 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/07 18:02:36 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/08 16:19:52 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	get_path_texture(t_var *var, char *line, char **path)
 {
 	int i;
-	
+
 	if (!ft_strchr(line, '.') || !ft_strchr(line, '/') || *path != NULL)
 		ft_error(var, "Invalid path texture precision in .cub\n");
 	if (line[0] == 'S' && (line[1] == ' ' || line[1] == '.'))
@@ -32,7 +32,7 @@ void	get_path_texture(t_var *var, char *line, char **path)
 	while (line[i] > 32 && line[i] < 127)
 		i++;
 	if (line[i + through_space(&line[i])] != '\0')
-			ft_error(var, "Invalid path texture precision in .cub\n");
+		ft_error(var, "Invalid path texture precision in .cub\n");
 	*path = ft_strndup(line, i);
 }
 

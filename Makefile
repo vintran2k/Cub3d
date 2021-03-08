@@ -1,5 +1,5 @@
-SRC =	error.c								\
-		event_key.c							\
+SRC =	event_key.c							\
+		exit.c								\
 		get_map.c							\
 		get_next_line.c						\
 		get_next_line_utils.c				\

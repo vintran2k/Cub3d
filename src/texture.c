@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 15:48:35 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/07 17:45:10 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/08 16:27:56 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,17 @@ void	get_texel_pos(t_var *var)
 		var->texel.wallx = var->raycst.posx + var->raycst.perpwalldist \
 						* var->raycst.raydirx;
 	var->texel.wallx -= floor((var->texel.wallx));
-	var->texel.texx = (int)(var->texel.wallx * (double)var->texture[var->texel.dir].width);
+	var->texel.texx = (int)(var->texel.wallx *
+	(double)var->texture[var->texel.dir].width);
 	if (var->raycst.side == 0 && var->raycst.raydirx > 0)
-		var->texel.texx = var->texture[var->texel.dir].width - var->texel.texx - 1;
+		var->texel.texx =
+		var->texture[var->texel.dir].width - var->texel.texx - 1;
 	if (var->raycst.side == 1 && var->raycst.raydiry < 0)
-		var->texel.texx = var->texture[var->texel.dir].width - var->texel.texx - 1;
+		var->texel.texx =
+		var->texture[var->texel.dir].width - var->texel.texx - 1;
 	var->texel.step = 1.0 * var->texture[0].height / var->raycst.lineheight;
-	var->texel.texpos = (var->raycst.drawstart - var->ry / 2 + var->raycst.lineheight / 2) * var->texel.step;
+	var->texel.texpos = (var->raycst.drawstart -
+	var->ry / 2 + var->raycst.lineheight / 2) * var->texel.step;
 }
 
 void	draw_wall(t_var *var, int x, int y)

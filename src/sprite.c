@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 16:47:15 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/03 15:22:46 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/08 16:29:15 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	get_sprite_dist(t_var *var)
 
 void	sort_sprite(t_var *var)
 {
-	int i;
-	double temp;
-	
+	int		i;
+	double	temp;
+
 	get_sprite_dist(var);
 	i = 0;
 	while (i < var->sprite.nb - 1)
@@ -51,28 +51,31 @@ void	sort_sprite(t_var *var)
 	}
 }
 
-void	get_draw_startend(t_sprite *sp, t_raycst ray, int rx, int ry, int i)
+void	get_draw_startend(t_var *var, t_sprite *sp, t_raycst ray, int i)
 {
 	sp->spritex = sp->pos[sp->order[i]].x - ray.posx;
 	sp->spritey = sp->pos[sp->order[i]].y - ray.posy;
 	sp->invdet = 1.0 / (ray.planex * ray.diry - ray.dirx * ray.planey);
-	sp->transformx = sp->invdet * (ray.diry * sp->spritex - ray.dirx * sp->spritey);
-	sp->transformy = sp->invdet * (-ray.planey * sp->spritex + ray.planex * sp->spritey);
-	sp->spritescreenx = (int)(rx / 2) * (1 + sp->transformx / sp->transformy);
-	sp->spriteheight = abs((int)(ry / (sp->transformy)));
-	sp->drawstarty = -sp->spriteheight / 2 + ry / 2;
+	sp->transformx = sp->invdet *
+	(ray.diry * sp->spritex - ray.dirx * sp->spritey);
+	sp->transformy = sp->invdet *
+	(-ray.planey * sp->spritex + ray.planex * sp->spritey);
+	sp->spritescreenx = (int)(var->rx / 2) *
+	(1 + sp->transformx / sp->transformy);
+	sp->spriteheight = abs((int)(var->ry / (sp->transformy)));
+	sp->drawstarty = -sp->spriteheight / 2 + var->ry / 2;
 	if (sp->drawstarty < 0)
 		sp->drawstarty = 0;
-	sp->drawendy = sp->spriteheight / 2 + ry / 2;
-	if (sp->drawendy >= ry)
-		sp->drawendy = ry - 1;
-	sp->spritewidth = abs((int)(ry / (sp->transformy)));
+	sp->drawendy = sp->spriteheight / 2 + var->ry / 2;
+	if (sp->drawendy >= var->ry)
+		sp->drawendy = var->ry - 1;
+	sp->spritewidth = abs((int)(var->ry / (sp->transformy)));
 	sp->drawstartx = -sp->spritewidth / 2 + sp->spritescreenx;
 	if (sp->drawstartx < 0)
 		sp->drawstartx = 0;
 	sp->drawendx = sp->spritewidth / 2 + sp->spritescreenx;
-	if (sp->drawendx >= rx)
-		sp->drawendx = rx - 1;
+	if (sp->drawendx >= var->rx)
+		sp->drawendx = var->rx - 1;
 	sp->stripe = sp->drawstartx;
 }
 
@@ -91,9 +94,10 @@ void	draw_sprite(t_var *var)
 		color = var->texture[4].addr[var->sprite.texy *
 			var->texture[4].line_length / 4 + var->sprite.texx];
 		if ((color & 0x00FFFFFF) != 0)
-			var->mlx.addr[y * var->mlx.line_length / 4 + var->sprite.stripe] = color;
+			var->mlx.addr[y * var->mlx.line_length / 4 + var->sprite.stripe] =
+			color;
 		y++;
-	}	
+	}
 }
 
 void	put_sprite(t_var *var)
@@ -104,15 +108,16 @@ void	put_sprite(t_var *var)
 	i = 0;
 	while (i < var->sprite.nb)
 	{
-		get_draw_startend(&var->sprite, var->raycst, var->rx, var->ry, i);
+		get_draw_startend(var, &var->sprite, var->raycst, i);
 		while (var->sprite.stripe < var->sprite.drawendx)
 		{
-			var->sprite.texx = (int)(256 * (var->sprite.stripe - (-var->sprite.spritewidth / 2
+			var->sprite.texx = (int)(256 * (var->sprite.stripe -
+			(-var->sprite.spritewidth / 2
 				+ var->sprite.spritescreenx)) * var->texture[4].width
 				/ var->sprite.spritewidth) / 256;
 			if (var->sprite.transformy > 0 && var->sprite.stripe >= 0
-					&& var->sprite.stripe < var->rx &&
-					var->sprite.transformy < var->sprite.zbuffer[var->sprite.stripe])
+					&& var->sprite.stripe < var->rx && var->sprite.transformy <
+					var->sprite.zbuffer[var->sprite.stripe])
 				draw_sprite(var);
 			var->sprite.stripe++;
 		}

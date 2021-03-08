@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 14:39:10 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/07 18:28:53 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/08 16:12:39 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	init_direction(t_var *var)
 	if (var->player_dir == 'S')
 	{
 		var->raycst.dirx = 1;
-		var->raycst.planey = -0.66;	
+		var->raycst.planey = -0.66;
 	}
 	if (var->player_dir == 'E')
 	{

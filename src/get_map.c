@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 18:45:05 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/07 18:10:38 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/08 16:08:18 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	malloc_map(t_var *var)
 
 void	get_map_line(char *line, t_var *var)
 {
-	static int i = 0;
-	int j;
+	static int	i;
+	int			j;
 
 	j = 0;
 	while (line[j])

@@ -6,23 +6,11 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 18:33:00 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/07 18:33:02 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/08 16:44:19 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-void	ft_swap_img(t_var *var) // ?
-{
-	void *tmp;
-
-	tmp = var->mlx.img;
-	var->mlx.img = var->mlx.img2;
-	var->mlx.img2 = tmp;
-	tmp = var->mlx.addr;
-	var->mlx.addr = var->mlx.addr2;
-	var->mlx.addr2 = tmp;
-}
 
 void	get_wall_dist(t_var *var)
 {
@@ -42,11 +30,13 @@ void	get_wall_dist(t_var *var)
 		}
 		if (var->map[var->raycst.mapx][var->raycst.mapy] == '1')
 			var->raycst.hit = 1;
-	}			
+	}
 	if (var->raycst.side == 0)
-		var->raycst.perpwalldist = ((double)var->raycst.mapx - var->raycst.posx + (1 - (double)var->raycst.stepx) / 2) / var->raycst.raydirx;
+		var->raycst.perpwalldist = ((double)var->raycst.mapx - var->raycst.posx
+		+ (1 - (double)var->raycst.stepx) / 2) / var->raycst.raydirx;
 	else
-		var->raycst.perpwalldist = ((double)var->raycst.mapy - var->raycst.posy + (1 - (double)var->raycst.stepy) / 2) / var->raycst.raydiry;
+		var->raycst.perpwalldist = ((double)var->raycst.mapy - var->raycst.posy
+		+ (1 - (double)var->raycst.stepy) / 2) / var->raycst.raydiry;
 }
 
 void	get_wall_pos(t_var *var)
@@ -64,7 +54,7 @@ void	get_wall_pos(t_var *var)
 void	draw_pixel_column(t_var *var, int x)
 {
 	int y;
-	
+
 	y = -1;
 	var->raycst.drawend = var->ry - var->raycst.drawstart;
 	while (++y <= var->raycst.drawstart)
@@ -78,12 +68,12 @@ void	draw_pixel_column(t_var *var, int x)
 
 int		raycasting(t_var *var)
 {
-	int     x;
+	int	x;
 
 	x = 0;
 	while (x < var->rx)
 	{
-		init_raycasting(var, x);		
+		init_raycasting(var, x);
 		get_wall_pos(var);
 		draw_pixel_column(var, x);
 		var->sprite.zbuffer[x] = var->raycst.perpwalldist;
@@ -92,8 +82,8 @@ int		raycasting(t_var *var)
 	put_sprite(var);
 	if (var->save == 1)
 		ft_save(var);
-	mlx_put_image_to_window(var->mlx.mlx_ptr, var->mlx.mlx_win, var->mlx.img, 0, 0);
+	mlx_put_image_to_window(var->mlx.mlx_ptr,
+	var->mlx.mlx_win, var->mlx.img, 0, 0);
 	move_rotate_player(var);
-	ft_swap_img(var);
 	return (0);
 }

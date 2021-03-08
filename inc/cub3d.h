@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 18:04:19 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/07 18:37:02 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/08 16:45:56 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ typedef struct	s_mlx
 	int			width;
 	int			height;
 	int			endian;
-	void		*img2;
-	int			*addr2;
 }				t_mlx;
 
 typedef struct	s_move
@@ -86,45 +84,45 @@ typedef struct	s_move
 	double		rotspeed;
 }				t_move;
 
-typedef struct		s_texel
+typedef struct	s_texel
 {
-	int				dir;
-	double			wallx;
-	int				texx;
-	int				texy;
-	double			step;
-	double			texpos;
-}					t_texel;
+	int			dir;
+	double		wallx;
+	int			texx;
+	int			texy;
+	double		step;
+	double		texpos;
+}				t_texel;
 
-typedef struct		s_pos
+typedef struct	s_pos
 {
-	double x;
-	double y;
-}					t_pos;
+	double		x;
+	double		y;
+}				t_pos;
 
-typedef struct		s_sprite
+typedef struct	s_sprite
 {
-	int				nb;
-	double			*zbuffer;
-	t_pos			*pos;
-	int				*order;
-	double			*dist;
-	double			spritex;
-	double			spritey;
-	double			invdet;
-	double			transformx;
-	double			transformy;
-	int				spritescreenx;
-	int				spriteheight;
-	int				spritewidth;
-	int				drawstartx;
-	int				drawstarty;
-	int				drawendy;
-	int				drawendx;
-	int				stripe;
-	int				texx;
-	int				texy;
-}					t_sprite;
+	int			nb;
+	double		*zbuffer;
+	t_pos		*pos;
+	int			*order;
+	double		*dist;
+	double		spritex;
+	double		spritey;
+	double		invdet;
+	double		transformx;
+	double		transformy;
+	int			spritescreenx;
+	int			spriteheight;
+	int			spritewidth;
+	int			drawstartx;
+	int			drawstarty;
+	int			drawendy;
+	int			drawendx;
+	int			stripe;
+	int			texx;
+	int			texy;
+}				t_sprite;
 
 typedef struct	s_var
 {
@@ -156,42 +154,43 @@ typedef struct	s_var
 }				t_var;
 
 //GNL:
-size_t	ft_strlen(const char *s);          //
-char	*ft_strchr(const char *s, int c);  //
-char	*ft_strcpy(char *dst, char *src);
-char	*ft_strdup(const char *s);         //
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-int		get_next_line(int fd, char **line);
+size_t			ft_strlen(const char *s);          //
+char			*ft_strchr(const char *s, int c);  //
+char			*ft_strcpy(char *dst, char *src);
+char			*ft_strdup(const char *s);         //
+char			*ft_substr(char const *s, unsigned int start, size_t len);
+int				get_next_line(int fd, char **line);
 
 //CUB3D:
-void	ft_error(t_var *var, char *error_msg);
-int		ft_exit_cub(t_var *var);
-void	init_var(t_var *var);
-void	parsing(int argc, char **argv, t_var *var);
-void	parsing_file(char *file, t_var *var);
-void	ft_putstr(char *str);
-int		ft_strcmp(const char *s1, const char *s2);
-char	*ft_strndup(const char *s, size_t n);
-int		ft_isdigit(int c);
-int		ft_atoi(const char *str);
-int		is_empty(char *str);
-int		through_space(char *str);
-int		is_longest(char *line, int prev);
-void	get_path_texture(t_var *var, char *line, char **path);
-void	get_resolution(t_var *var, char *line);
-void	get_rgb(t_var *var, char *line, int *color);
-void	get_map(char *file, t_var *var);
-void	parsing_map(t_var *var);
-void	get_texture_img(t_var *var);
-void	draw_wall(t_var *var, int x, int y);
-void	init_raycasting(t_var *var, int x);
-void	init_raycst(t_var *var);
-int		raycasting(t_var *var);
-int		key_press(int keycode, t_var *var);
-int		key_release(int keycode, t_var *var);
-void	move_rotate_player(t_var *var);
-void	init_sprite(t_var *var);
-void	put_sprite(t_var *var);
-void	ft_save(t_var *var);
+void			ft_error(t_var *var, char *error_msg);
+int				ft_exit_cub(t_var *var);
+void			init_var(t_var *var);
+void			parsing(int argc, char **argv, t_var *var);
+void			parsing_file(char *file, t_var *var);
+void			ft_putstr(char *str);
+int				ft_strcmp(const char *s1, const char *s2);
+char			*ft_strndup(const char *s, size_t n);
+int				ft_isdigit(int c);
+int				ft_atoi(const char *str);
+int				is_empty(char *str);
+int				through_space(char *str);
+int				is_longest(char *line, int prev);
+void			get_path_texture(t_var *var, char *line, char **path);
+void			get_resolution(t_var *var, char *line);
+void			get_rgb(t_var *var, char *line, int *color);
+void			get_map(char *file, t_var *var);
+void			parsing_map(t_var *var);
+int				check_map_char(char *line);
+void			get_texture_img(t_var *var);
+void			draw_wall(t_var *var, int x, int y);
+void			init_raycasting(t_var *var, int x);
+void			init_raycst(t_var *var);
+int				raycasting(t_var *var);
+int				key_press(int keycode, t_var *var);
+int				key_release(int keycode, t_var *var);
+void			move_rotate_player(t_var *var);
+void			init_sprite(t_var *var);
+void			put_sprite(t_var *var);
+void			ft_save(t_var *var);
 
 #endif

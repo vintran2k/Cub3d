@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 17:43:36 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/07 18:20:48 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/08 16:18:17 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int		is_map_params(t_var *var)
 {
 	if (var->no == NULL || var->so == NULL ||
-	var->we == NULL || var->ea == NULL || var->sp == NULL || !var->rx || !var->ry)
+	var->we == NULL || var->ea == NULL ||
+	var->sp == NULL || !var->rx || !var->ry)
 		return (0);
 	if (var->f == -1 || var->c == -1)
 		return (0);
@@ -42,13 +43,15 @@ void	get_map_params(char *line, t_var *var)
 	else if (line[0] == 'F' && (line[1] == ' ' || ft_isdigit(line[1])))
 		get_rgb(var, line, &var->f);
 	else if (!is_empty(line))
-		ft_error(var, "Invalid precision1 in .cub\n");
+		ft_error(var, "Invalid precision in .cub\n");
 }
 
 void	get_map_size(t_var *var, char *line)
 {
 	static int empty_before;
 
+	if (!check_map_char(line))
+		ft_error(var, "Invalid precision in .cub\n");
 	if (empty_before == 1 && !is_empty(line))
 		ft_error(var, "Empty line in the map\n");
 	if (is_empty(line))
@@ -90,25 +93,7 @@ void	parsing_file(char *file, t_var *var)
 	get_map(file, var);
 }
 
-void	print_var(t_var *var, int all) /// a suppr
-{
-	int i;
-
-	i = 0;
-	if (all)
-	{
-		printf("no = %s\nso = %s\nwe = %s\nea = %s\nsp = %s\nrx = %d\nry = %d\n", var->no, var->so, var->we, var->ea, var->sp, var->rx, var->ry);
-		printf("C:  %d\n", var->c);
-		printf("F:  %d\n", var->f);
-		printf("map_beg = %d\nmap_lines = %d\nl_line = %d\n\n", var->map_beg, var->map_lines, var->l_line);
-	}
-	printf("_________________________________________\n");
-	while (i < var->map_lines)
-		printf("%s\n", var->map[i++]);
-	printf("_________________________________________\n");
-}
-
-void		parsing(int argc, char **argv, t_var *var)
+void	parsing(int argc, char **argv, t_var *var)
 {
 	int i;
 
@@ -130,7 +115,5 @@ void		parsing(int argc, char **argv, t_var *var)
 	if (i == 0 || ft_strcmp(&argv[1][i], ".cub"))
 		ft_error(var, "Incorrect Arguments\n");
 	parsing_file(argv[1], var);
-	print_var(var, 1); //
 	parsing_map(var);
-	print_var(var, 0);
 }
