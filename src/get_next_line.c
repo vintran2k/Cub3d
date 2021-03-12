@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 10:15:11 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/12 14:27:50 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/12 16:18:16 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,47 +57,27 @@ char	*strjoin_buf(char *file, char *buf)
 	return (res);
 }
 
-int		get_next_line(int fd, char **line)
+int		get_next_line(int fd, char **line, t_var *var)
 {
-	static char	*file;
 	char		buf[BUFFER_SIZE + 1];
 	int			ret;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || !line)
 		return (-1);
-	if (file && get_line(line, file))
+	if (var->file && get_line(line, var->file))
 		return (1);
 	while ((ret = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
 		buf[ret] = '\0';
-		if (!(file = strjoin_buf(file, buf)))
+		if (!(var->file = strjoin_buf(var->file, buf)))
 			return (-1);
-		if (get_line(line, file))
+		if (get_line(line, var->file))
 			return (1);
 	}
-	if (file && *file)
-		*line = ft_strdup(file);
+	if (var->file && *var->file)
+		*line = ft_strdup(var->file);
 	else
 		*line = ft_strdup("");
-	free_str(&file);
+	free_str(&var->file);
 	return (ret);
 }
-
-/*int     main(int argc, char **argv)
-{
-    int     fd;
-    int     ret;
-    char    *line;
-    fd = 0;
-    ret = 1;
-    if (argc > 1)
-        fd = open(argv[1], O_RDONLY);
-    while (ret)
-    {
-        ret = get_next_line(fd, &line);
-        printf(“ret = %d  line = |%s|\n”, ret, line);
-    }
-    free(line);
-    //system(“leaks a.out”);
-    return (0);
-}*/

@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 17:43:36 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/12 15:48:35 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/12 17:00:54 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	parsing_file(char *file, t_var *var)
 		ft_error(var, "open() file .cub failled\n");
 	while (ret)
 	{
-		ret = get_next_line(fd, &var->line);
+		ret = get_next_line(fd, &var->line, var);
 		if (!is_map_params(var))
 		{
 			get_map_params(var->line, var);
@@ -87,6 +87,7 @@ void	parsing_file(char *file, t_var *var)
 		else if (!(is_empty(var->line) && var->l_line == 0))
 			get_map_size(var);
 		free(var->line);
+		var->line = NULL; //
 	}
 	close(fd);
 	get_map(file, var);

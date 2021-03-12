@@ -4,11 +4,10 @@
 
 NO         ./textures/brick.xpm        
 SO./textures/brick.xpm
-SO./textures/brick.xpm
-EA  ./textures/brick.xpm    
-WE      ./textures/brick.xpm  
-S./textures/tonneau.xpm   
 
+EA  ./textures/brick.xpm    
+WE      ./textures/rick.xpm  
+S./textures/tonneau.xpm   
 
 F  72, 11, 23
 

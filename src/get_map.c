@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 18:45:05 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/12 14:55:12 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/12 16:00:08 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	get_map(char *file, t_var *var)
 	fd = open(file, O_RDONLY);
 	while (i < var->map_beg)
 	{
-		get_next_line(fd, &line);
+		get_next_line(fd, &line, var);
 		free(line);
 		i++;
 	}
@@ -70,7 +70,7 @@ void	get_map(char *file, t_var *var)
 	ret = 1;
 	while (ret != 0 && ret != -1)
 	{
-		ret = get_next_line(fd, &line);
+		ret = get_next_line(fd, &line, var);
 		if (i < var->map_lines && (!is_empty(line) ||
 		(is_empty(line) && var->map[0][0])))
 			get_map_line(line, var);
