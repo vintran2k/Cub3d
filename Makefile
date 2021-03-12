@@ -23,7 +23,7 @@ MLX_DIR = minilibx-linux
 MLX = libmlx.a
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
 OBJ_DIR = obj
 SRC_DIR = src

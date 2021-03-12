@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 17:43:36 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/08 16:18:17 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/12 15:48:35 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,19 @@ void	get_map_params(char *line, t_var *var)
 		ft_error(var, "Invalid precision in .cub\n");
 }
 
-void	get_map_size(t_var *var, char *line)
+void	get_map_size(t_var *var)
 {
 	static int empty_before;
 
-	if (!check_map_char(line))
+	if (!check_map_char(var->line))
 		ft_error(var, "Invalid precision in .cub\n");
-	if (empty_before == 1 && !is_empty(line))
+	if (empty_before == 1 && !is_empty(var->line))
 		ft_error(var, "Empty line in the map\n");
-	if (is_empty(line))
+	if (is_empty(var->line))
 		empty_before = 1;
 	else
 	{
-		var->l_line = is_longest(line, var->l_line);
+		var->l_line = is_longest(var->line, var->l_line);
 		var->map_lines++;
 		empty_before = 0;
 	}
@@ -68,7 +68,6 @@ void	parsing_file(char *file, t_var *var)
 {
 	int		fd;
 	int		ret;
-	char	*line;
 
 	ret = 1;
 	if ((fd = open(file, O_DIRECTORY)) != -1)
@@ -77,17 +76,17 @@ void	parsing_file(char *file, t_var *var)
 		ft_error(var, "open() file .cub failled\n");
 	while (ret)
 	{
-		ret = get_next_line(fd, &line);
+		ret = get_next_line(fd, &var->line);
 		if (!is_map_params(var))
 		{
-			get_map_params(line, var);
+			get_map_params(var->line, var);
 			var->map_beg++;
 		}
-		else if (is_empty(line) && var->l_line == 0)
+		else if (is_empty(var->line) && var->l_line == 0)
 			var->map_beg++;
-		else if (!(is_empty(line) && var->l_line == 0))
-			get_map_size(var, line);
-		free(line);
+		else if (!(is_empty(var->line) && var->l_line == 0))
+			get_map_size(var);
+		free(var->line);
 	}
 	close(fd);
 	get_map(file, var);

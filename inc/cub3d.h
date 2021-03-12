@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 18:04:19 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/08 16:45:56 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/12 15:54:48 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ typedef struct	s_sprite
 
 typedef struct	s_var
 {
+	char		*file;
+	char		*line;
 	char		*no;
 	char		*so;
 	char		*we;

@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/11 18:45:05 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/08 16:08:18 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/12 14:55:12 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	get_map(char *file, t_var *var)
 {
 	int		i;
 	int		fd;
+	int		ret;
 	char	*line;
 
 	malloc_map(var);
@@ -66,10 +67,12 @@ void	get_map(char *file, t_var *var)
 		i++;
 	}
 	i = 0;
-	while (i < var->map_lines)
+	ret = 1;
+	while (ret != 0 && ret != -1)
 	{
-		get_next_line(fd, &line);
-		if (!is_empty(line) || (is_empty(line) && var->map[0][0]))
+		ret = get_next_line(fd, &line);
+		if (i < var->map_lines && (!is_empty(line) ||
+		(is_empty(line) && var->map[0][0])))
 			get_map_line(line, var);
 		free(line);
 		i++;

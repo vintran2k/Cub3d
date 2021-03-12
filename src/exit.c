@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 16:32:50 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/08 16:32:52 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/12 15:45:47 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,18 @@ void	mlx_destroy(t_var *var)
 		mlx_destroy_image(var->mlx.mlx_ptr, var->texture[4].img);
 	if (var->mlx.mlx_win)
 		mlx_destroy_window(var->mlx.mlx_ptr, var->mlx.mlx_win);
+	if (var->mlx.mlx_ptr)
+	{
+		mlx_destroy_display(var->mlx.mlx_ptr);
+		free(var->mlx.mlx_ptr);
+	}
 }
 
 int		ft_exit_cub(t_var *var)
 {
 	free_map(var);
+	if (var->line)
+		free(var->line);
 	if (var->no)
 		free(var->no);
 	if (var->so)

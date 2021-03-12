@@ -4,6 +4,7 @@
 
 NO         ./textures/brick.xpm        
 SO./textures/brick.xpm
+SO./textures/brick.xpm
 EA  ./textures/brick.xpm    
 WE      ./textures/brick.xpm  
 S./textures/tonneau.xpm   
