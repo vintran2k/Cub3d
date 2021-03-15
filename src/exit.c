@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 16:32:50 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/12 16:47:21 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/15 18:50:03 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	mlx_destroy(t_var *var)
 int		ft_exit_cub(t_var *var)
 {
 	free_map(var);
-	printf("line = %s\n", var->line);
 	free(var->line);
 	if (var->file)
 		free(var->file);

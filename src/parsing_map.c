@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:55:59 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/15 14:40:54 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/15 18:49:54 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ void	parsing_map(t_var *var)
 	x = 0;
 	while (x < var->map_lines)
 	{
-		if (!check_map_char(var->map[x]))
-			ft_error(var, "Invalid character in the map\n");
 		y = 0;
 		while (var->map[x][y])
 		{

@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 14:39:10 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/12 16:12:44 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/15 15:22:47 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,48 +26,21 @@ void	ft_bzero(void *s, size_t n)
 	s = str;
 }
 
-/*void	init_null_ptr(t_var *var)
-{
-	var->map = NULL;
-	var->no = NULL;
-	var->so = NULL;
-	var->we = NULL;
-	var->ea = NULL;
-	var->sp = NULL;
-	var->sprite.zbuffer = NULL;
-	var->sprite.pos = NULL;
-	var->sprite.order = NULL;
-	var->sprite.dist = NULL;
-	var->mlx.mlx_win = NULL;
-	var->mlx.img = NULL;
-	var->texture[0].img = NULL;
-	var->texture[1].img = NULL;
-	var->texture[2].img = NULL;
-	var->texture[3].img = NULL;
-	var->texture[4].img = NULL;
-	//ft_bzero(var, sizeof(t_var));
-	//ft_bzero(&var->mlx, sizeof(var->mlx));
-}*/
-
 void	init_var(t_var *var)
 {
 	ft_bzero(var, sizeof(t_var));
 	ft_bzero(&var->mlx, sizeof(var->mlx));
+	ft_bzero(&var->raycst, sizeof(t_raycst));
 	ft_bzero(&var->sprite, sizeof(t_sprite));
 	var->player_x = -1;
 	var->player_y = -1;
 	var->f = -1;
 	var->c = -1;
 	var->map_beg = 1;
-	//init_null_ptr(var);
 }
 
 void	init_direction(t_var *var)
 {
-	var->raycst.dirx = 0;
-	var->raycst.diry = 0;
-	var->raycst.planex = 0;
-	var->raycst.planey = 0;
 	if (var->player_dir == 'N')
 	{
 		var->raycst.dirx = -1;
