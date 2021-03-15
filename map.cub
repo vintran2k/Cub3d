@@ -6,7 +6,7 @@ NO         ./textures/brick.xpm
 SO./textures/brick.xpm
 
 EA  ./textures/brick.xpm    
-WE      ./textures/rick.xpm  
+WE      ./textures/brick.xpm  
 S./textures/tonneau.xpm   
 
 F  72, 11, 23
@@ -41,7 +41,6 @@ F  72, 11, 23
 100000000000000000000000000000001
 100000000000000000000000000000001
 111111111111111111111111111111111
-
 
 
 

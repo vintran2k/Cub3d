@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/10 16:55:59 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/08 16:19:01 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/15 14:40:54 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	get_player_pos(t_var *var)
 
 int		check_arround(t_var *var, int x, int y)
 {
-	if (y == 0 || y == var->l_line || x == 0 || x == var->map_lines)
+	if (y == 0 || y == var->l_line || x == 0 || x == var->map_lines -1)
 		return (0);
 	if (var->map[x][y - 1] != '0'
 	&& var->map[x][y - 1] != '1' && var->map[x][y - 1] != '2')
