@@ -1,64 +1,52 @@
-SRC =	event_key.c							\
-		exit.c								\
-		get_map.c							\
-		get_next_line.c						\
-		get_next_line_utils.c				\
-		init2.c								\
-		init.c								\
-		main.c								\
-		move.c								\
-		parsing.c							\
-		parsing_map.c						\
-		parsing_map_params.c				\
-		parsing_utils.c						\
-		raycasting.c						\
-		save.c								\
-		sprite.c							\
-		texture.c							\
-		utils.c								\
+NAME			=	cub3D
+CC				=	gcc
+FLAGS			=	-Wall -Werror -Wextra -I $(HEADER_DIR) -I $(MLX_DIR)#-I $(LIBFT)
 
-NAME = Cub3D
+SRC_DIR			=	./srcs/
+OBJS_DIR		=	./objs/
+MLX_DIR			=	./minilibx-linux/
+LIBFT_DIR		=	./libft/
+HEADER_DIR		=	./inc/
+SRCS			=	./srcs/main.c									\
+					$(addprefix $(SRC_DIR), get_next_line.c)		\
+					$(addprefix $(SRC_DIR), get_next_line_utils.c)	\
+					$(addprefix $(SRC_DIR), utils.c)				\
+					$(addprefix $(SRC_DIR), parsing_utils.c)		\
+					$(addprefix $(SRC_DIR), init.c)					\
+					$(addprefix $(SRC_DIR), init2.c)				\
+					$(addprefix $(SRC_DIR), parsing.c)				\
+					$(addprefix $(SRC_DIR), parsing_map_params.c)	\
+					$(addprefix $(SRC_DIR), parsing_map.c)			\
+					$(addprefix $(SRC_DIR), get_map.c)				\
+					$(addprefix $(SRC_DIR), event_key.c)			\
+					$(addprefix $(SRC_DIR), texture.c)				\
+					$(addprefix $(SRC_DIR), move.c)					\
+					$(addprefix $(SRC_DIR), raycasting.c)			\
+					$(addprefix $(SRC_DIR), sprite.c)				\
+					$(addprefix $(SRC_DIR), save.c)					\
+					$(addprefix $(SRC_DIR), exit.c)					
+OBJS			=	$(SRCS:.c=.o)
 
-MLX_DIR = minilibx-linux
-MLX = libmlx.a
-CC = clang
+.c.o		:
+				$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
+all			:	$(NAME)
 
-OBJ_DIR = obj
-SRC_DIR = src
-INC_DIR = inc
+$(NAME)		:	$(OBJS)
+			#make -C $(LIBFT)
+			make -C $(MLX_DIR)
+			$(CC) $(FLAGS) -o $(NAME) $(OBJS) -L $(MLX_DIR) -lmlx -lm -lbsd -lX11 -lXext
+			@echo $(NAME) : Created !
 
-OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
-DPD = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.d))
+clean		:
+			rm -rf $(OBJS)
+			#make clean -C $(LIBFT)
+			make clean -C $(MLX_DIR)
+			@echo "[OBJS] Deleted"
 
-.c.o:
-	${CC} ${CFLAGS} -c$< -o ${<:.c=.o}
+fclean		:	clean
+			rm -f $(NAME)
+			#make fclean -C $(LIBFT)
+			@echo "[$(NAME)]: Deleted"
 
-all:
-	@$(MAKE) -j $(NAME)
-
-$(NAME): $(OBJ)
-		${CC} $(CFLAGS) -o $(NAME) $(OBJ) -L $(MLX_DIR) -lmlx -lm -lbsd -lX11 -lXext
-		@echo $(NAME) : Created !
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | .gitignore
-		@mkdir -p $(OBJ_DIR)
-		${CC} $(CFLAGS) -I $(INC_DIR) -I $(MLX_DIR) -c $< -o $@
-
-.gitignore:
-		@echo $(NAME) > .gitignore
-
-clean:
-	@rm -rf $(OBJ_DIR)
-	@echo "obj deleted"
-
-fclean:	clean
-	@rm -rf $(NAME)
-	@echo "[$(NAME)]: deleted"
-
-re: fclean all
-
-.PHONY: all, clean, fclean, re
-
--include $(DPD)
+re			:	fclean all
