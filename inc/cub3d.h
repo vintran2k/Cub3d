@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 18:04:19 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/12 15:59:46 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/24 22:59:14 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,15 +155,12 @@ typedef struct	s_var
 	t_sprite	sprite;
 }				t_var;
 
-//GNL:
-size_t			ft_strlen(const char *s);          //
-char			*ft_strchr(const char *s, int c);  //
+size_t			ft_strlen(const char *s);
+char			*ft_strchr(const char *s, int c);
 char			*ft_strcpy(char *dst, char *src);
-char			*ft_strdup(const char *s);         //
+char			*ft_strdup(const char *s);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 int				get_next_line(int fd, char **line, t_var *var);
-
-//CUB3D:
 void			ft_error(t_var *var, char *error_msg);
 int				ft_exit_cub(t_var *var);
 void			init_var(t_var *var);
