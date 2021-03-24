@@ -1,9 +1,8 @@
 NAME			=	cub3D
 CC				=	gcc
-FLAGS			=	-Wall -Werror -Wextra -I $(HEADER_DIR) -I $(MLX_DIR)#-I $(LIBFT)
 
+FLAGS			=	-Wall -Werror -Wextra -I $(HEADER_DIR) -I $(MLX_DIR)#-I $(LIBFT)
 SRC_DIR			=	./srcs/
-OBJS_DIR		=	./objs/
 MLX_DIR			=	./minilibx-linux/
 LIBFT_DIR		=	./libft/
 HEADER_DIR		=	./inc/
@@ -36,7 +35,7 @@ $(NAME)		:	$(OBJS)
 			#make -C $(LIBFT)
 			make -C $(MLX_DIR)
 			$(CC) $(FLAGS) -o $(NAME) $(OBJS) -L $(MLX_DIR) -lmlx -lm -lbsd -lX11 -lXext
-			@echo $(NAME) : Created !
+			@echo [$(NAME)] : Created !
 
 clean		:
 			rm -rf $(OBJS)
