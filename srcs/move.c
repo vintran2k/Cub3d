@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 15:56:22 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/24 23:43:21 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/24 23:47:55 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	move_left_right(t_var *var)
 {
 	double speed;
 
+	speed = var->move.movespeed;
 	if (var->move.forward == 1 || var->move.back == 1)
 		speed = var->move.movespeed / 1.5;
 	if (var->move.right == 1)
