@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/08 14:39:10 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/24 22:59:09 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/24 23:33:54 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,5 @@ void	init_raycst(t_var *var)
 	var->move.rotate_left = 0;
 	var->move.rotate_right = 0;
 	var->move.movespeed = 0.03;
-	var->move.rotspeed = 0.020;
+	var->move.rotspeed = 0.02;
 }

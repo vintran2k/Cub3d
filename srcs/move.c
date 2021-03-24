@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 15:56:22 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/24 23:14:34 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/24 23:43:21 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	move_left_right(t_var *var)
 	if (var->move.right == 1)
 	{
 		if (var->map[(int)(var->raycst.posx + var->raycst.diry *
-		(speed * 2))][(int)var->raycst.posy] == '0')
+		speed * 2)][(int)var->raycst.posy] == '0')
 			var->raycst.posx += var->raycst.diry * speed;
 		if (var->map[(int)var->raycst.posx][(int)(var->raycst.posy -
 		var->raycst.dirx * (speed * 2))] == '0')
@@ -57,7 +57,7 @@ void	move_left_right(t_var *var)
 	if (var->move.left == 1)
 	{
 		if (var->map[(int)(var->raycst.posx - var->raycst.diry *
-		(speed * 2))][(int)var->raycst.posy] == '0')
+		speed * 2)][(int)var->raycst.posy] == '0')
 			var->raycst.posx -= var->raycst.diry * speed;
 		if (var->map[(int)var->raycst.posx][(int)(var->raycst.posy +
 		var->raycst.dirx * (speed * 2))] == '0')
