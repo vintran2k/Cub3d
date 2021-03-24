@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 15:56:22 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/08 16:16:53 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/24 23:14:34 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,54 @@
 
 void	move_forward_back(t_var *var)
 {
+	double speed;
+
+	speed = var->move.movespeed;
+	if (var->move.left == 1 || var->move.right == 1)
+		speed = speed / 1.5;
 	if (var->move.forward == 1)
 	{
 		if (var->map[(int)(var->raycst.posx + (var->raycst.dirx *
-		var->move.movespeed * 2))][(int)var->raycst.posy] == '0')
-			var->raycst.posx += var->raycst.dirx * var->move.movespeed;
+		speed * 2))][(int)var->raycst.posy] == '0')
+			var->raycst.posx += var->raycst.dirx * speed;
 		if (var->map[(int)(var->raycst.posx)][(int)(var->raycst.posy +
-		(var->raycst.diry * var->move.movespeed * 2))] == '0')
-			var->raycst.posy += var->raycst.diry * var->move.movespeed;
+		(var->raycst.diry * speed * 2))] == '0')
+			var->raycst.posy += var->raycst.diry * speed;
 	}
 	if (var->move.back == 1)
 	{
 		if (var->map[(int)(var->raycst.posx - (var->raycst.dirx *
-		var->move.movespeed * 2))][(int)(var->raycst.posy)] == '0')
-			var->raycst.posx -= var->raycst.dirx * var->move.movespeed;
+		speed * 2))][(int)(var->raycst.posy)] == '0')
+			var->raycst.posx -= var->raycst.dirx * speed;
 		if (var->map[(int)(var->raycst.posx)][(int)(var->raycst.posy -
-					(var->raycst.diry * var->move.movespeed * 2))] == '0')
-			var->raycst.posy -= var->raycst.diry * var->move.movespeed;
+					(var->raycst.diry * speed * 2))] == '0')
+			var->raycst.posy -= var->raycst.diry * speed;
 	}
 }
 
 void	move_left_right(t_var *var)
 {
+	double speed;
+
+	if (var->move.forward == 1 || var->move.back == 1)
+		speed = var->move.movespeed / 1.5;
 	if (var->move.right == 1)
 	{
 		if (var->map[(int)(var->raycst.posx + var->raycst.diry *
-		(var->move.movespeed * 2))][(int)var->raycst.posy] == '0')
-			var->raycst.posx += var->raycst.diry * var->move.movespeed;
+		(speed * 2))][(int)var->raycst.posy] == '0')
+			var->raycst.posx += var->raycst.diry * speed;
 		if (var->map[(int)var->raycst.posx][(int)(var->raycst.posy -
-		var->raycst.dirx * (var->move.movespeed * 2))] == '0')
-			var->raycst.posy -= var->raycst.dirx * var->move.movespeed;
+		var->raycst.dirx * (speed * 2))] == '0')
+			var->raycst.posy -= var->raycst.dirx * speed;
 	}
 	if (var->move.left == 1)
 	{
 		if (var->map[(int)(var->raycst.posx - var->raycst.diry *
-		(var->move.movespeed * 2))][(int)var->raycst.posy] == '0')
-			var->raycst.posx -= var->raycst.diry * var->move.movespeed;
+		(speed * 2))][(int)var->raycst.posy] == '0')
+			var->raycst.posx -= var->raycst.diry * speed;
 		if (var->map[(int)var->raycst.posx][(int)(var->raycst.posy +
-		var->raycst.dirx * (var->move.movespeed * 2))] == '0')
-			var->raycst.posy += var->raycst.dirx * var->move.movespeed;
+		var->raycst.dirx * (speed * 2))] == '0')
+			var->raycst.posy += var->raycst.dirx * speed;
 	}
 }
 

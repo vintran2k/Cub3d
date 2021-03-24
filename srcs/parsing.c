@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 17:43:36 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/15 14:42:28 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/24 22:47:20 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	parsing_file(char *file, t_var *var)
 		else if (!(is_empty(var->line) && var->l_line == 0))
 			get_map_size(var);
 		free(var->line);
-		var->line = NULL; //
+		var->line = NULL;
 	}
 	close(fd);
 	get_map(file, var);
