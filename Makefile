@@ -1,7 +1,4 @@
 NAME			=	cub3D
-CC				=	gcc
-
-FLAGS			=	-Wall -Werror -Wextra -I $(HEADER_DIR) -I $(MLX_DIR)#-I $(LIBFT)
 SRC_DIR			=	./srcs/
 MLX_DIR			=	./minilibx-linux/
 LIBFT_DIR		=	./libft/
@@ -25,6 +22,8 @@ SRCS			=	./srcs/main.c									\
 					$(addprefix $(SRC_DIR), save.c)					\
 					$(addprefix $(SRC_DIR), exit.c)					
 OBJS			=	$(SRCS:.c=.o)
+CC				=	gcc
+FLAGS			=	-Wall -Werror -Wextra -I $(HEADER_DIR) -I $(MLX_DIR)#-I $(LIBFT)
 
 .c.o		:
 				$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
