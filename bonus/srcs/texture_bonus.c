@@ -6,11 +6,11 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 15:48:35 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/25 11:29:52 by vintran          ###   ########.fr       */
+/*   Updated: 2021/03/25 01:41:11 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/bonus.h"
 
 void	get_texture(t_var *var)
 {
@@ -36,9 +36,34 @@ void	get_texture(t_var *var)
 		ft_error(var, "Impossible to get S texture\n");
 }
 
+void	get_bonus_texture(t_var *var)
+{
+	if (var->ft)
+	{
+		if (!(var->texture[5].img = mlx_xpm_file_to_image(var->mlx.mlx_ptr,
+						var->ft, &(var->texture[5].width),
+						&(var->texture[5].height))))
+			ft_error(var, "Impossible to get FT texture\n");
+		var->texture[5].addr = (int *)mlx_get_data_addr(var->texture[5].img,
+				&var->texture[5].bits_per_pixel,
+				&var->texture[5].line_length, &var->texture[5].endian);
+	}
+	if (var->ct)
+	{
+		if (!(var->texture[6].img = mlx_xpm_file_to_image(var->mlx.mlx_ptr,
+						var->ct, &(var->texture[6].width),
+						&(var->texture[6].height))))
+			ft_error(var, "Impossible to get CT texture\n");
+		var->texture[6].addr = (int *)mlx_get_data_addr(var->texture[6].img,
+				&var->texture[6].bits_per_pixel,
+				&var->texture[6].line_length, &var->texture[6].endian);
+	}
+}
+
 void	get_texture_img(t_var *var)
 {
 	get_texture(var);
+	get_bonus_texture(var);
 	var->texture[0].addr = (int *)mlx_get_data_addr(var->texture[0].img,
 			&var->texture[0].bits_per_pixel,
 			&var->texture[0].line_length, &var->texture[0].endian);
@@ -72,10 +97,10 @@ void	get_texel_pos(t_var *var)
 {
 	get_texture_dir(var);
 	if (var->raycst.side == 0)
-		var->texel.wallx = var->raycst.posy + var->raycst.perpwalldist
+		var->texel.wallx = var->raycst.posy + var->raycst.perpwalldist \
 						* var->raycst.raydiry;
 	else
-		var->texel.wallx = var->raycst.posx + var->raycst.perpwalldist
+		var->texel.wallx = var->raycst.posx + var->raycst.perpwalldist \
 						* var->raycst.raydirx;
 	var->texel.wallx -= floor((var->texel.wallx));
 	var->texel.texx = (int)(var->texel.wallx *
@@ -89,25 +114,4 @@ void	get_texel_pos(t_var *var)
 	var->texel.step = 1.0 * var->texture[0].height / var->raycst.lineheight;
 	var->texel.texpos = (var->raycst.drawstart -
 	var->ry / 2 + var->raycst.lineheight / 2) * var->texel.step;
-}
-
-void	draw_wall(t_var *var, int x, int y)
-{
-	int	color;
-
-	get_texel_pos(var);
-	while (y <= var->raycst.drawend)
-	{
-		var->texel.texy = (int)var->texel.texpos &
-			(var->texture[var->texel.dir].height - 1);
-		var->texel.texpos += var->texel.step;
-		if (y < var->ry && x < var->rx)
-		{
-			color = var->texture[var->texel.dir].addr[var->texel.texy *
-					var->texture[var->texel.dir].line_length /
-						4 + var->texel.texx];
-			var->mlx.addr[y * var->mlx.line_length / 4 + x] = color;
-		}
-		y++;
-	}
 }

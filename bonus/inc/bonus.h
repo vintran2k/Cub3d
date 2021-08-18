@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   bonus.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/06 18:04:19 by vintran           #+#    #+#             */
-/*   Updated: 2021/03/25 11:41:51 by vintran          ###   ########.fr       */
+/*   Created: 2021/03/25 11:39:11 by vintran           #+#    #+#             */
+/*   Updated: 2021/03/25 11:41:23 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef BONUS_H
+# define BONUS_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -122,6 +122,38 @@ typedef struct	s_sprite
 	int			texy;
 }				t_sprite;
 
+typedef struct	s_floor
+{
+	float		raydirx0;
+	float		raydiry0;
+	float		raydirx1;
+	float		raydiry1;
+	int			p;
+	float		posz;
+	float		rowdistance;
+	float		floorstepx;
+	float		floorstepy;
+	float		floorx;
+	float		floory;
+	int			cellx;
+	int			celly;
+	int			tx;
+	int			ty;
+}				t_floor;
+
+typedef struct	s_mini
+{
+	int			rx;
+	int			ry;
+	int			edge;
+	int			case_s;
+	int			drawstartx;
+	int			drawstarty;
+	int			drawendx;
+	int			drawendy;
+	int			color[3];
+}				t_mini;
+
 typedef struct	s_var
 {
 	char		*file;
@@ -131,6 +163,8 @@ typedef struct	s_var
 	char		*we;
 	char		*ea;
 	char		*sp;
+	char		*ft;
+	char		*ct;
 	int			screenx;
 	int			screeny;
 	int			rx;
@@ -145,12 +179,15 @@ typedef struct	s_var
 	int			map_lines;
 	int			l_line;
 	char		**map;
+	int			minimapkey;
 	t_mlx		mlx;
 	t_raycst	raycst;
 	t_move		move;
-	t_mlx		texture[5];
+	t_mlx		texture[7];
 	t_texel		texel;
 	t_sprite	sprite;
+	t_floor		fc;
+	t_mini		mc;
 }				t_var;
 
 size_t			ft_strlen(const char *s);
@@ -179,7 +216,7 @@ void			get_map(char *file, t_var *var);
 void			parsing_map(t_var *var);
 int				check_map_char(char *line);
 void			get_texture_img(t_var *var);
-void			draw_wall(t_var *var, int x, int y);
+void			get_texel_pos(t_var *var);
 void			init_raycasting(t_var *var, int x);
 void			init_raycst(t_var *var);
 int				raycasting(t_var *var);
@@ -189,5 +226,8 @@ void			move_rotate_player(t_var *var);
 void			init_sprite(t_var *var);
 void			put_sprite(t_var *var);
 void			ft_save(t_var *var);
+void			fc_casting(t_var *var, int t);
+void			init_minimap(t_var *var);
+void			print_minimap(t_var *var);
 
 #endif
